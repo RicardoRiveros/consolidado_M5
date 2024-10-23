@@ -1,0 +1,81 @@
+CONSULTAS:
+
+Se omitirá las columnas en las cuales existen valores predefinidos por omision, tales como fecha de creación, actualización, entre otras según tabla)
+
+#Aquellas usadas para insertar, modificar y eliminar un Customer, Staff y Actor.
+TABLA customer:
+
+	INSERTAR EN TABLA customer:
+		INSERT INTO customer (store_id,first_name,last_name,email,address_id,active)
+		VALUES (1, 'Ricardo', 'Riveros', 'ricardoriveros@hotmail.com', 60, 1);
+
+
+	UPDATE EN TABLA customer:
+		UPDATE customer
+		SET email='riveros.ricardo@hotmail.com'
+		WHERE customer_id=600;
+
+
+	DELETE EN TABLA customer:
+		DELETE FROM customer 
+		WHERE customer_id=600;
+
+
+TABLA staff:
+
+	INSERTAR EN TABLA staff:
+		INSERT INTO staff (first_name, last_name, address_id, email, store_id, username, password)
+		VALUES ('Andres', 'Turra', 67, 'andresturra@staff.com', 1, 'Andy', '1234');
+
+
+	UPDATE EN TABLA tabla staff:
+		UPDATE staff
+		SET username='Andres'
+		WHERE staff_id=3;
+
+
+	DELETE EN TABLA staff:
+		DELETE FROM staff
+		WHERE staff_id=3;
+
+
+TABLA actor:
+	INSERTAR EN TABLA actor:
+		INSERT INTO actor (first_name, last_name)
+		VALUES ('Delfina', 'Guzman');
+
+
+	UPDATE EN TABLA actor:
+		UPDATE actor
+		SET first_name='Ana'
+		WHERE actor_id=201;
+
+
+	DELETE EN TABLA actor:
+		DELETE FROM actor
+		WHERE actor_id=201;
+
+
+
+
+#Listar todas las “rental” con los datos del “customer” dado un año y mes.
+
+SELECT r.rental_id, r.rental_date, c.first_name, c.last_name, c.email
+FROM rental r
+JOIN customer c ON r.customer_id=c.customer_id
+WHERE (EXTRACT(year FROM r.rental_date))=2005 AND (EXTRACT(month FROM r.rental_date))=05;
+
+
+
+#Listar Número, Fecha (payment_date) y Total (amount) de todas las “payment”.
+
+SELECT payment_id AS Numero, payment_date AS Fecha, amount AS Total
+FROM payment;
+
+
+#Listar todas las “film” del año 2006 que contengan un (rental_rate) mayor a 4.0
+
+SELECT * FROM film
+WHERE release_year=2006 AND rental_rate>4.0; 
+
+
